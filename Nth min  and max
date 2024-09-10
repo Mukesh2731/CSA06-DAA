@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <limits.h>
+
+int findMthMax(int arr[], int size, int M) {
+    int count = 0, max = INT_MIN;
+    while (count <= M) {
+        int currentMax = INT_MIN;
+        for (int i = 0; i < size; i++) {
+            if (arr[i] > currentMax && arr[i] < max) {
+                currentMax = arr[i];
+            }
+        }
+        max = currentMax;
+        count++;
+    }
+    return max;
+}
+
+int findNthMin(int arr[], int size, int N) {
+    int count = 0, min = INT_MAX;
+    while (count <= N) {
+        int currentMin = INT_MAX;
+        for (int i = 0; i < size; i++) {
+            if (arr[i] < currentMin && arr[i] > min) {
+                currentMin = arr[i];
+            }
+        }
+        min = currentMin;
+        count++;
+    }
+    return min;
+}
+
+int main() {
+    int arr[] = {16, 16, 16, 16, 16};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int M = 0, N = 1;
+
+    int MthMax = findMthMax(arr, size, M);
+    int NthMin = findNthMin(arr, size, N);
+
+    int sum = MthMax + NthMin;
+    int difference = MthMax - NthMin;
+
+    printf("M-th Maximum: %d\n", MthMax);
+    printf("N-th Minimum: %d\n", NthMin);
+    printf("Sum: %d\n", sum);
+    printf("Difference: %d\n", difference);
+
+    return 0;
+}
